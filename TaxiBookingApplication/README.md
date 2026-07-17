@@ -138,16 +138,35 @@ python verify_flow.py
 ### 1. Customer Ride History Page
 ![Customer Ride History](screenshots/ride_history.png)
 
-### 2. Admin Control Panel - Customers Management
+### 2. Driver Dashboard
+![Driver Dashboard](screenshots/driver_dashboard.png)
+
+### 3. Admin Control Panel - Customers Management
 ![Admin Customers Management](screenshots/admin_customers.png)
 
-### 3. Admin Control Panel - Payments Management
+### 4. Admin Control Panel - Payments Management
 ![Admin Payments Management](screenshots/admin_payments.png)
 
-### 4. SQLite Database Tables (db.sqlite3)
+### 5. SQLite Database Tables (db.sqlite3)
 *Bookings Table:*
 ![SQLite Bookings Table](screenshots/sqlite_bookings_1.png)
 
 *Trip logs:*
 ![SQLite Trip Logs](screenshots/sqlite_bookings_2.png)
+
+---
+
+## Postman API Screenshots
+
+### 1. GET Customers API (Status: 200 OK)
+![Postman GET Customers](screenshots/postman_get_customers.png)
+
+### 2. POST Add Customer API (Status: 201 Created)
+![Postman POST Add Customer](screenshots/postman_post_customer.png)
+
+### 3. PUT Update Customer API (Status: 200 OK)
+![Postman PUT Update Customer](screenshots/postman_put_customer.png)
+
+### 4. DELETE Customer API (Status: 200 OK)
+![Postman DELETE Customer](screenshots/postman_delete_customer.png)
 
