@@ -130,3 +130,24 @@ To run the E2E passenger-driver ride workflow simulation:
 ```bash
 python verify_flow.py
 ```
+
+---
+
+## Application Preview & Database Screenshots
+
+### 1. Customer Ride History Page
+![Customer Ride History](screenshots/ride_history.png)
+
+### 2. Admin Control Panel - Customers Management
+![Admin Customers Management](screenshots/admin_customers.png)
+
+### 3. Admin Control Panel - Payments Management
+![Admin Payments Management](screenshots/admin_payments.png)
+
+### 4. SQLite Database Tables (db.sqlite3)
+*Bookings Table:*
+![SQLite Bookings Table](screenshots/sqlite_bookings_1.png)
+
+*Trip logs:*
+![SQLite Trip Logs](screenshots/sqlite_bookings_2.png)
+
