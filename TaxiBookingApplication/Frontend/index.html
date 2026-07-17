@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaxiGo - Premium Taxi Booking</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-taxi"></i> Taxi<span>Go</span></a>
+            <nav>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="booking.html">Book Ride</a></li>
+                    <li><a href="drivers.html">Drivers</a></li>
+                    <li><a href="ride_history.html">Ride History</a></li>
+                    <li><a href="customer_dashboard.html" id="nav-customer-dash" style="display:none;">Customer Dash</a></li>
+                    <li><a href="driver_dashboard.html" id="nav-driver-dash" style="display:none;">Driver Dash</a></li>
+                    <li><a href="admin_dashboard.html" id="nav-admin-dash" style="display:none;">Admin Dash</a></li>
+                    <li id="nav-auth-btn"><a href="login.html" class="nav-btn">Login / Register</a></li>
+                    <li id="nav-user-profile" style="display:none;"></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Alert toast notification -->
+    <div id="alert-banner" class="alert-banner"></div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-text">
+                <h1>Your Ride, <br><span>Redefined.</span></h1>
+                <p>Experience the ultimate convenience in urban transport. Premium vehicles, highly experienced drivers, and instant, secure transactions. Get to where you need to be in absolute comfort.</p>
+                <div class="hero-buttons">
+                    <a href="booking.html" class="btn-primary" style="width: auto; padding: 0.85rem 2rem;"><i class="fa-solid fa-cab"></i> Book a Ride</a>
+                    <a href="register.html" class="btn-secondary">Join as Driver</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <!-- Sleek CSS Taxi SVG illustration -->
+                <svg width="350" height="250" viewBox="0 0 350 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="yellowGlow" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#ffb703" />
+                            <stop offset="100%" stop-color="#fb8500" />
+                        </linearGradient>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <!-- Background Glow -->
+                    <circle cx="175" cy="125" r="100" fill="url(#yellowGlow)" opacity="0.15" filter="url(#glow)" />
+                    <!-- Futuristic City lines -->
+                    <line x1="20" y1="210" x2="330" y2="210" stroke="rgba(255,183,3,0.3)" stroke-width="3" />
+                    <line x1="40" y1="180" x2="310" y2="180" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+                    <!-- Sedan Taxi Body -->
+                    <path d="M70,180 L80,130 C82,120 95,100 120,100 L210,100 C230,100 240,115 245,130 L260,180 Z" fill="url(#yellowGlow)" />
+                    <!-- Windows -->
+                    <path d="M125,108 L165,108 L165,132 L115,132 Z" fill="#09090b" opacity="0.8" />
+                    <path d="M175,108 L210,108 L225,132 L175,132 Z" fill="#09090b" opacity="0.8" />
+                    <!-- Wheel Arches -->
+                    <circle cx="105" cy="180" r="28" fill="#09090b" />
+                    <circle cx="225" cy="180" r="28" fill="#09090b" />
+                    <!-- Wheels -->
+                    <circle cx="105" cy="180" r="20" fill="#1e1e24" stroke="var(--accent)" stroke-width="2" />
+                    <circle cx="225" cy="180" r="20" fill="#1e1e24" stroke="var(--accent)" stroke-width="2" />
+                    <circle cx="105" cy="180" r="6" fill="#fff" />
+                    <circle cx="225" cy="180" r="6" fill="#fff" />
+                    <!-- Headlight and Tail light -->
+                    <circle cx="255" cy="145" r="5" fill="#ffd166" filter="url(#glow)" />
+                    <circle cx="75" cy="145" r="5" fill="#ef4444" />
+                    <!-- Taxi Roof Light -->
+                    <path d="M150,100 L180,100 L175,90 L155,90 Z" fill="#09090b" stroke="var(--accent)" stroke-width="2" />
+                    <text x="157" y="99" fill="var(--accent)" font-family="Plus Jakarta Sans" font-weight="900" font-size="8">TAXI</text>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Book a Ride Info Section -->
+        <section class="page-section">
+            <h2 class="section-title">Why Book with <span>TaxiGo</span>?</h2>
+            <div class="grid-container">
+                <div class="destination-card">
+                    <h3><i class="fa-solid fa-bolt" style="color:var(--accent); margin-right: 0.5rem;"></i> Instant Booking</h3>
+                    <p>Get matched with a nearby driver in seconds. Real-time availability ensures you're never left waiting.</p>
+                </div>
+                <div class="destination-card">
+                    <h3><i class="fa-solid fa-shield-halved" style="color:var(--accent); margin-right: 0.5rem;"></i> Safe & Secure</h3>
+                    <p>All drivers undergo background checks. Ride tracking and verified payment systems guarantee absolute safety.</p>
+                </div>
+                <div class="destination-card">
+                    <h3><i class="fa-solid fa-tags" style="color:var(--accent); margin-right: 0.5rem;"></i> Transparent Pricing</h3>
+                    <p>Know your fare upfront before you book. No hidden charges, no sudden surges, completely fair pricing.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Popular Destinations -->
+        <section class="page-section">
+            <h2 class="section-title">Popular <span>Destinations</span></h2>
+            <div class="grid-container">
+                <div class="destination-card">
+                    <h3>Madhapur (IT Hub)</h3>
+                    <p>Fastest route to your office. Standard fare starts from ₹150.</p>
+                </div>
+                <div class="destination-card">
+                    <h3>Gachibowli (Financial District)</h3>
+                    <p>Comfortable sedan rides for long business commutes. Standard fare starts from ₹200.</p>
+                </div>
+                <div class="destination-card">
+                    <h3>Secunderabad Railway Station</h3>
+                    <p>Timely pickup and drops to make sure you never miss a train. Standard fare starts from ₹350.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Offers Section -->
+        <section class="page-section">
+            <h2 class="section-title">Special <span>Offers & Discounts</span></h2>
+            <div class="grid-container">
+                <div class="offer-card">
+                    <span class="discount">30% OFF</span>
+                    <h3>First Ride Discount</h3>
+                    <p>Use coupon code <strong>FIRST30</strong> on your first booking and save up to ₹100.</p>
+                </div>
+                <div class="offer-card">
+                    <span class="discount">₹50 CASHBACK</span>
+                    <h3>UPI Wallet Payment Offer</h3>
+                    <p>Get ₹50 cashback when you make your payment using UPI transfer.</p>
+                </div>
+                <div class="offer-card">
+                    <span class="discount">FREE UPGRADE</span>
+                    <h3>Weekend Luxury Upgrade</h3>
+                    <p>Book a Sedan on weekends and stand a chance to get upgraded to a Luxury ride for free.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 TaxiGo booking application. All rights reserved. Powered by Django & Javascript.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

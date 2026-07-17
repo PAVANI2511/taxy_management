@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaxiGo - Complete Payment</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-taxi"></i> Taxi<span>Go</span></a>
+            <nav>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="booking.html">Book Ride</a></li>
+                    <li><a href="drivers.html">Drivers</a></li>
+                    <li><a href="ride_history.html">Ride History</a></li>
+                    <li><a href="customer_dashboard.html" id="nav-customer-dash" style="display:none;">Customer Dash</a></li>
+                    <li><a href="driver_dashboard.html" id="nav-driver-dash" style="display:none;">Driver Dash</a></li>
+                    <li><a href="admin_dashboard.html" id="nav-admin-dash" style="display:none;">Admin Dash</a></li>
+                    <li id="nav-auth-btn"><a href="login.html" class="nav-btn">Login / Register</a></li>
+                    <li id="nav-user-profile" style="display:none;"></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="alert-banner" class="alert-banner"></div>
+
+    <main>
+        <div class="auth-container" style="max-width: 600px; margin: 2rem auto;">
+            <div class="auth-header">
+                <h1>Complete <span>Payment</span></h1>
+                <p>Verify ride invoice details and select your payment method.</p>
+            </div>
+
+            <div id="checkout-details" style="margin-bottom: 2rem; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem;">
+                <!-- Loaded dynamically by Javascript -->
+                <div style="text-align: center; padding: 1rem;">
+                    <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 1.5rem; color: var(--accent);"></i>
+                    <p style="margin-top: 0.5rem;">Fetching invoice details...</p>
+                </div>
+            </div>
+
+            <form id="payment-form" onsubmit="processPayment(event)">
+                <div class="form-group">
+                    <label for="pay-method">Select Payment Method</label>
+                    <select id="pay-method" class="form-control" required>
+                        <option value="UPI">UPI Transfer (GooglePay, PhonePe, Paytm)</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="Debit Card">Debit Card</option>
+                        <option value="Wallet">Digital Wallet (Paytm, AmazonPay)</option>
+                        <option value="Cash">Cash to Driver</option>
+                    </select>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <button type="submit" class="btn-primary" id="pay-now-btn"><i class="fa-solid fa-credit-card"></i> Pay & Confirm Booking</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 TaxiGo booking application. All rights reserved. Powered by Django & Javascript.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof initCheckoutPage === 'function') {
+                initCheckoutPage();
+            }
+        });
+    </script>
+</body>
+</html>

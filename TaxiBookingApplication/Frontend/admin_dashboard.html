@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaxiGo - Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-taxi"></i> Taxi<span>Go</span></a>
+            <nav>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="booking.html">Book Ride</a></li>
+                    <li><a href="drivers.html">Drivers</a></li>
+                    <li><a href="ride_history.html">Ride History</a></li>
+                    <li><a href="customer_dashboard.html" id="nav-customer-dash" style="display:none;">Customer Dash</a></li>
+                    <li><a href="driver_dashboard.html" id="nav-driver-dash" style="display:none;">Driver Dash</a></li>
+                    <li><a href="admin_dashboard.html" class="active" id="nav-admin-dash">Admin Dash</a></li>
+                    <li id="nav-auth-btn"><a href="login.html" class="nav-btn">Login / Register</a></li>
+                    <li id="nav-user-profile" style="display:none;"></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="alert-banner" class="alert-banner"></div>
+
+    <main>
+        <section class="page-section">
+            <h2 class="section-title">Admin <span>Control Panel</span></h2>
+
+            <!-- Tabs Navigation -->
+            <div class="tabs-header">
+                <button class="tab-link active" onclick="switchAdminTab('customers')"><i class="fa-solid fa-users"></i> Customers</button>
+                <button class="tab-link" onclick="switchAdminTab('drivers')"><i class="fa-solid fa-id-card"></i> Drivers</button>
+                <button class="tab-link" onclick="switchAdminTab('vehicles')"><i class="fa-solid fa-car"></i> Vehicles</button>
+                <button class="tab-link" onclick="switchAdminTab('bookings')"><i class="fa-solid fa-calendar-check"></i> Bookings</button>
+                <button class="tab-link" onclick="switchAdminTab('payments')"><i class="fa-solid fa-money-check-dollar"></i> Payments</button>
+            </div>
+
+            <!-- Tab Content: Customers -->
+            <div id="tab-customers" class="tab-content active">
+                <div class="dashboard-actions">
+                    <h2>Manage Customers</h2>
+                    <button class="btn-add" onclick="openAdminModal('customer', 'add')"><i class="fa-solid fa-plus"></i> Add Customer</button>
+                </div>
+                <div class="dashboard-table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Address</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-customers-tbody">
+                            <!-- Injected dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab Content: Drivers -->
+            <div id="tab-drivers" class="tab-content">
+                <div class="dashboard-actions">
+                    <h2>Manage Drivers</h2>
+                    <button class="btn-add" onclick="openAdminModal('driver', 'add')"><i class="fa-solid fa-plus"></i> Add Driver</button>
+                </div>
+                <div class="dashboard-table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Driver Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>License Number</th>
+                                <th>Experience</th>
+                                <th>Availability</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-drivers-tbody">
+                            <!-- Injected dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab Content: Vehicles -->
+            <div id="tab-vehicles" class="tab-content">
+                <div class="dashboard-actions">
+                    <h2>Manage Vehicles</h2>
+                    <button class="btn-add" onclick="openAdminModal('vehicle', 'add')"><i class="fa-solid fa-plus"></i> Add Vehicle</button>
+                </div>
+                <div class="dashboard-table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Driver Name</th>
+                                <th>Vehicle Type</th>
+                                <th>Vehicle Number</th>
+                                <th>Seating Capacity</th>
+                                <th>Model</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-vehicles-tbody">
+                            <!-- Injected dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab Content: Bookings -->
+            <div id="tab-bookings" class="tab-content">
+                <div class="dashboard-actions">
+                    <h2>Manage Ride Bookings</h2>
+                    <button class="btn-add" onclick="openAdminModal('booking', 'add')"><i class="fa-solid fa-plus"></i> Add Booking</button>
+                </div>
+                <div class="dashboard-table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Customer Name</th>
+                                <th>Driver Name</th>
+                                <th>Pickup</th>
+                                <th>Drop</th>
+                                <th>Date</th>
+                                <th>Fare</th>
+                                <th>Ride Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-bookings-tbody">
+                            <!-- Injected dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab Content: Payments -->
+            <div id="tab-payments" class="tab-content">
+                <div class="dashboard-actions">
+                    <h2>Manage Payments</h2>
+                    <button class="btn-add" onclick="openAdminModal('payment', 'add')"><i class="fa-solid fa-plus"></i> Add Payment</button>
+                </div>
+                <div class="dashboard-table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Booking ID</th>
+                                <th>Customer Name</th>
+                                <th>Amount</th>
+                                <th>Method</th>
+                                <th>Status</th>
+                                <th>Transaction ID</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-payments-tbody">
+                            <!-- Injected dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ADMIN DYNAMIC CRUD MODAL -->
+    <div id="admin-crud-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">CRUD Operation</h2>
+                <button class="modal-close" onclick="closeAdminModal()">&times;</button>
+            </div>
+            <form id="admin-crud-form" onsubmit="handleAdminCrudSubmit(event)">
+                <!-- Target schema type and action -->
+                <input type="hidden" id="modal-schema-type">
+                <input type="hidden" id="modal-action-type">
+                <input type="hidden" id="modal-record-id">
+
+                <!-- Dynamic Form Fields Container -->
+                <div id="modal-fields-container"></div>
+
+                <button type="submit" class="btn-primary" style="margin-top: 1.5rem;"><i class="fa-solid fa-floppy-disk"></i> Save Record</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 TaxiGo booking application. All rights reserved. Powered by Django & Javascript.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof initAdminDashboard === 'function') {
+                initAdminDashboard();
+            }
+        });
+    </script>
+</body>
+</html>

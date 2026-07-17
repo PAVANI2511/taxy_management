@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaxiGo - Our Drivers</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-taxi"></i> Taxi<span>Go</span></a>
+            <nav>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="booking.html">Book Ride</a></li>
+                    <li><a href="drivers.html" class="active">Drivers</a></li>
+                    <li><a href="ride_history.html">Ride History</a></li>
+                    <li><a href="customer_dashboard.html" id="nav-customer-dash" style="display:none;">Customer Dash</a></li>
+                    <li><a href="driver_dashboard.html" id="nav-driver-dash" style="display:none;">Driver Dash</a></li>
+                    <li><a href="admin_dashboard.html" id="nav-admin-dash" style="display:none;">Admin Dash</a></li>
+                    <li id="nav-auth-btn"><a href="login.html" class="nav-btn">Login / Register</a></li>
+                    <li id="nav-user-profile" style="display:none;"></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="alert-banner" class="alert-banner"></div>
+
+    <main>
+        <section class="page-section">
+            <h2 class="section-title">Professional <span>Drivers</span></h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem; max-width: 600px;">Meet our team of licensed, professional drivers. Choose from Hatchbacks to Luxury cars, all equipped with real-time status trackers.</p>
+            
+            <div id="drivers-grid" class="grid-container">
+                <!-- Driver Cards will be injected by script.js -->
+                <div class="metric-card" style="text-align: center; padding: 3rem; grid-column: 1 / -1;">
+                    <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                    <p>Loading driver database...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 TaxiGo booking application. All rights reserved. Powered by Django & Javascript.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Trigger loadDrivers when the DOM content is ready
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof loadDriversPage === 'function') {
+                loadDriversPage();
+            }
+        });
+    </script>
+</body>
+</html>

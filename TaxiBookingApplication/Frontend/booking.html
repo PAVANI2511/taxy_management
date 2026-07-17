@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaxiGo - Book a Ride</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-taxi"></i> Taxi<span>Go</span></a>
+            <nav>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="booking.html" class="active">Book Ride</a></li>
+                    <li><a href="drivers.html">Drivers</a></li>
+                    <li><a href="ride_history.html">Ride History</a></li>
+                    <li><a href="customer_dashboard.html" id="nav-customer-dash" style="display:none;">Customer Dash</a></li>
+                    <li><a href="driver_dashboard.html" id="nav-driver-dash" style="display:none;">Driver Dash</a></li>
+                    <li><a href="admin_dashboard.html" id="nav-admin-dash" style="display:none;">Admin Dash</a></li>
+                    <li id="nav-auth-btn"><a href="login.html" class="nav-btn">Login / Register</a></li>
+                    <li id="nav-user-profile" style="display:none;"></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="alert-banner" class="alert-banner"></div>
+
+    <main>
+        <section class="page-section">
+            <h2 class="section-title">Book your <span>Taxi Ride</span></h2>
+            
+            <div class="booking-grid">
+                <!-- Booking Form -->
+                <div class="booking-form-card">
+                    <form id="booking-form">
+                        <div class="form-group">
+                            <label for="pickup-loc"><i class="fa-solid fa-location-dot" style="color: var(--accent);"></i> Pickup Location</label>
+                            <input type="text" id="pickup-loc" class="form-control" placeholder="Enter pickup address (e.g. Madhapur)" required oninput="calculateFareEstimate()">
+                        </div>
+                        <div class="form-group">
+                            <label for="drop-loc"><i class="fa-solid fa-location-crosshairs" style="color: var(--accent);"></i> Drop Location</label>
+                            <input type="text" id="drop-loc" class="form-control" placeholder="Enter destination (e.g. Gachibowli)" required oninput="calculateFareEstimate()">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Select Vehicle Type</label>
+                            <div class="vehicle-selector">
+                                <div class="vehicle-type-option selected" data-type="Hatchback" data-rate="12" data-base="40" onclick="selectVehicleOption(this)">
+                                    <i class="fa-solid fa-car-side"></i>
+                                    <span>Hatchback</span>
+                                    <span class="capacity">4 Seats</span>
+                                </div>
+                                <div class="vehicle-type-option" data-type="Sedan" data-rate="15" data-base="60" onclick="selectVehicleOption(this)">
+                                    <i class="fa-solid fa-car"></i>
+                                    <span>Sedan</span>
+                                    <span class="capacity">4 Seats</span>
+                                </div>
+                                <div class="vehicle-type-option" data-type="SUV" data-rate="22" data-base="80" onclick="selectVehicleOption(this)">
+                                    <i class="fa-solid fa-truck-monster"></i>
+                                    <span>SUV</span>
+                                    <span class="capacity">6 Seats</span>
+                                </div>
+                                <div class="vehicle-type-option" data-type="Auto" data-rate="8" data-base="30" onclick="selectVehicleOption(this)">
+                                    <i class="fa-solid fa-motorcycle"></i>
+                                    <span>Auto</span>
+                                    <span class="capacity">3 Seats</span>
+                                </div>
+                                <div class="vehicle-type-option" data-type="Bike" data-rate="6" data-base="15" onclick="selectVehicleOption(this)">
+                                    <i class="fa-solid fa-bicycle"></i>
+                                    <span>Bike</span>
+                                    <span class="capacity">1 Seat</span>
+                                </div>
+                                <div class="vehicle-type-option" data-type="Luxury" data-rate="35" data-base="120" onclick="selectVehicleOption(this)">
+                                    <i class="fa-solid fa-crown"></i>
+                                    <span>Luxury</span>
+                                    <span class="capacity">4 Seats</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 1.5rem;">
+                            <label for="booking-date">Ride Date</label>
+                            <input type="date" id="booking-date" class="form-control" required>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Booking Summary / Fare Estimate -->
+                <div class="booking-summary-card">
+                    <div>
+                        <h3 style="margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;"><i class="fa-solid fa-file-invoice-dollar" style="color:var(--accent);"></i> Ride Summary</h3>
+                        
+                        <div class="summary-item">
+                            <span>Pickup:</span>
+                            <span id="summary-pickup">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Drop:</span>
+                            <span id="summary-drop">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Vehicle Selected:</span>
+                            <span id="summary-vehicle">Hatchback</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Distance (Est.):</span>
+                            <span id="summary-distance">0 km</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Base Rate:</span>
+                            <span id="summary-base">₹40</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="fare-total">
+                            <span>Estimated Fare:</span>
+                            <span id="summary-total">₹0</span>
+                        </div>
+                        
+                        <button type="button" class="btn-primary" style="margin-top: 1.5rem;" onclick="submitBooking()"><i class="fa-solid fa-circle-check"></i> Book Taxi Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 TaxiGo booking application. All rights reserved. Powered by Django & Javascript.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Form field event helper functions
+        function selectVehicleOption(element) {
+            document.querySelectorAll('.vehicle-type-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            document.getElementById('summary-vehicle').innerText = element.getAttribute('data-type');
+            document.getElementById('summary-base').innerText = '₹' + element.getAttribute('data-base');
+            calculateFareEstimate();
+        }
+
+        function calculateFareEstimate() {
+            const pickup = document.getElementById('pickup-loc').value.trim();
+            const drop = document.getElementById('drop-loc').value.trim();
+            
+            document.getElementById('summary-pickup').innerText = pickup || '-';
+            document.getElementById('summary-drop').innerText = drop || '-';
+
+            if (!pickup || !drop) {
+                document.getElementById('summary-distance').innerText = '0 km';
+                document.getElementById('summary-total').innerText = '₹0';
+                return;
+            }
+
+            // Simulate distance using string lengths
+            const distance = Math.max(3, (pickup.length + drop.length) % 25 + 2);
+            document.getElementById('summary-distance').innerText = distance + ' km';
+
+            // Calculate fare
+            const activeOption = document.querySelector('.vehicle-type-option.selected');
+            const base = parseInt(activeOption.getAttribute('data-base'));
+            const rate = parseInt(activeOption.getAttribute('data-rate'));
+            
+            const total = base + (distance * rate);
+            document.getElementById('summary-total').innerText = '₹' + total;
+        }
+
+        // Set default date to today
+        window.addEventListener('DOMContentLoaded', () => {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('booking-date').value = today;
+        });
+    </script>
+</body>
+</html>

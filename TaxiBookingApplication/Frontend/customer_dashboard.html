@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaxiGo - Customer Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-taxi"></i> Taxi<span>Go</span></a>
+            <nav>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="booking.html">Book Ride</a></li>
+                    <li><a href="drivers.html">Drivers</a></li>
+                    <li><a href="ride_history.html">Ride History</a></li>
+                    <li><a href="customer_dashboard.html" class="active" id="nav-customer-dash">Customer Dash</a></li>
+                    <li><a href="driver_dashboard.html" id="nav-driver-dash" style="display:none;">Driver Dash</a></li>
+                    <li><a href="admin_dashboard.html" id="nav-admin-dash" style="display:none;">Admin Dash</a></li>
+                    <li id="nav-auth-btn"><a href="login.html" class="nav-btn">Login / Register</a></li>
+                    <li id="nav-user-profile" style="display:none;"></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="alert-banner" class="alert-banner"></div>
+
+    <main>
+        <section class="page-section">
+            <h2 class="section-title">Customer <span>Dashboard</span></h2>
+            
+            <!-- Metric Cards -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <span class="title">Total Rides</span>
+                    <span id="cust-total-rides" class="value">0</span>
+                </div>
+                <div class="metric-card">
+                    <span class="title">Completed Rides</span>
+                    <span id="cust-completed-rides" class="value" style="color: var(--success);">0</span>
+                </div>
+                <div class="metric-card">
+                    <span class="title">Upcoming Rides</span>
+                    <span id="cust-upcoming-rides" class="value" style="color: var(--pending);">0</span>
+                </div>
+                <div class="metric-card">
+                    <span class="title">Total Spent</span>
+                    <span id="cust-total-spent" class="value">₹0</span>
+                </div>
+            </div>
+
+            <!-- Ride Lists -->
+            <div class="dashboard-actions">
+                <h2>Recent Bookings & Payment History</h2>
+                <a href="booking.html" class="btn-add" style="text-decoration: none;"><i class="fa-solid fa-plus"></i> Book New Ride</a>
+            </div>
+
+            <div class="dashboard-table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Booking ID</th>
+                            <th>Driver Name</th>
+                            <th>Route</th>
+                            <th>Date</th>
+                            <th>Fare</th>
+                            <th>Ride Status</th>
+                            <th>Payment Method</th>
+                            <th>Payment Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cust-dashboard-tbody">
+                        <tr>
+                            <td colspan="8" style="text-align: center; padding: 2rem;">
+                                <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 1.5rem; color: var(--accent);"></i>
+                                <p style="margin-top: 0.5rem;">Loading dashboard metrics...</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 TaxiGo booking application. All rights reserved. Powered by Django & Javascript.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof initCustomerDashboard === 'function') {
+                initCustomerDashboard();
+            }
+        });
+    </script>
+</body>
+</html>

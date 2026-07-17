@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaxiGo - Register</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-taxi"></i> Taxi<span>Go</span></a>
+            <nav>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="booking.html">Book Ride</a></li>
+                    <li><a href="drivers.html">Drivers</a></li>
+                    <li><a href="ride_history.html">Ride History</a></li>
+                    <li><a href="customer_dashboard.html" id="nav-customer-dash" style="display:none;">Customer Dash</a></li>
+                    <li><a href="driver_dashboard.html" id="nav-driver-dash" style="display:none;">Driver Dash</a></li>
+                    <li><a href="admin_dashboard.html" id="nav-admin-dash" style="display:none;">Admin Dash</a></li>
+                    <li id="nav-auth-btn"><a href="login.html" class="nav-btn active">Login / Register</a></li>
+                    <li id="nav-user-profile" style="display:none;"></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="alert-banner" class="alert-banner"></div>
+
+    <main>
+        <div class="auth-container" style="max-width: 550px;">
+            <div class="auth-header">
+                <h1>Create an <span>Account</span></h1>
+                <p>Register as a passenger to book rides, or as a driver to earn on your terms.</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="register-role">I want to register as a</label>
+                <select id="register-role" onchange="toggleRegisterFields()">
+                    <option value="customer">Customer / Passenger</option>
+                    <option value="driver">Driver</option>
+                </select>
+            </div>
+
+            <form id="register-form">
+                <!-- Customer Fields -->
+                <div id="customer-fields-container">
+                    <div class="form-group">
+                        <label for="cust-id">Customer ID (Number)</label>
+                        <input type="number" id="cust-id" class="form-control" placeholder="e.g. 101" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cust-name">Full Name</label>
+                        <input type="text" id="cust-name" class="form-control" placeholder="Rahul Sharma" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cust-email">Email Address</label>
+                        <input type="email" id="cust-email" class="form-control" placeholder="rahul@gmail.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cust-phone">Phone Number</label>
+                        <input type="text" id="cust-phone" class="form-control" placeholder="9876543210" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cust-address">Address</label>
+                        <input type="text" id="cust-address" class="form-control" placeholder="Hyderabad" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cust-password">Password</label>
+                        <input type="password" id="cust-password" class="form-control" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <!-- Driver Fields (Hidden initially) -->
+                <div id="driver-fields-container" style="display: none;">
+                    <div class="form-group">
+                        <label for="driver-id">Driver ID (Number)</label>
+                        <input type="number" id="driver-id" class="form-control" placeholder="e.g. 201">
+                    </div>
+                    <div class="form-group">
+                        <label for="driver-name">Driver Name</label>
+                        <input type="text" id="driver-name" class="form-control" placeholder="Ramesh Kumar">
+                    </div>
+                    <div class="form-group">
+                        <label for="driver-email">Email Address</label>
+                        <input type="email" id="driver-email" class="form-control" placeholder="ramesh@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="driver-phone">Phone Number</label>
+                        <input type="text" id="driver-phone" class="form-control" placeholder="9988776655">
+                    </div>
+                    <div class="form-group">
+                        <label for="driver-license">License Number</label>
+                        <input type="text" id="driver-license" class="form-control" placeholder="DL123456789">
+                    </div>
+                    <div class="form-group">
+                        <label for="driver-experience">Experience (Years)</label>
+                        <input type="number" id="driver-experience" class="form-control" placeholder="e.g. 5" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="driver-password">Password</label>
+                        <input type="password" id="driver-password" class="form-control" placeholder="••••••••">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary" style="margin-top: 1rem;"><i class="fa-solid fa-user-plus"></i> Register</button>
+            </form>
+            <div class="auth-footer">
+                Already have an account? <a href="login.html">Login here</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 TaxiGo booking application. All rights reserved. Powered by Django & Javascript.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function toggleRegisterFields() {
+            const role = document.getElementById('register-role').value;
+            const custContainer = document.getElementById('customer-fields-container');
+            const driverContainer = document.getElementById('driver-fields-container');
+            
+            // Toggle container visibility
+            if (role === 'customer') {
+                custContainer.style.display = 'block';
+                driverContainer.style.display = 'none';
+                
+                // Toggle required attributes
+                document.getElementById('cust-id').required = true;
+                document.getElementById('cust-name').required = true;
+                document.getElementById('cust-email').required = true;
+                document.getElementById('cust-phone').required = true;
+                document.getElementById('cust-address').required = true;
+                document.getElementById('cust-password').required = true;
+
+                document.getElementById('driver-id').required = false;
+                document.getElementById('driver-name').required = false;
+                document.getElementById('driver-email').required = false;
+                document.getElementById('driver-phone').required = false;
+                document.getElementById('driver-license').required = false;
+                document.getElementById('driver-password').required = false;
+            } else {
+                custContainer.style.display = 'none';
+                driverContainer.style.display = 'block';
+                
+                // Toggle required attributes
+                document.getElementById('cust-id').required = false;
+                document.getElementById('cust-name').required = false;
+                document.getElementById('cust-email').required = false;
+                document.getElementById('cust-phone').required = false;
+                document.getElementById('cust-address').required = false;
+                document.getElementById('cust-password').required = false;
+
+                document.getElementById('driver-id').required = true;
+                document.getElementById('driver-name').required = true;
+                document.getElementById('driver-email').required = true;
+                document.getElementById('driver-phone').required = true;
+                document.getElementById('driver-license').required = true;
+                document.getElementById('driver-password').required = true;
+            }
+        }
+        // Run on page load to configure defaults
+        window.addEventListener('DOMContentLoaded', toggleRegisterFields);
+    </script>
+</body>
+</html>
